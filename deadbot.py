@@ -61,19 +61,19 @@ class Player:
 		self.playlist = []
 		# TODO: load fallback songs from config file
 		self.fallback_songs = [
-			'https://www.youtube.com/watch?v=O6NvsM49N6w',
-			'https://www.youtube.com/watch?v=7ZFWDaRy9Z4',
-			'https://www.youtube.com/watch?v=n8X9_MgEdCg',
-			'https://www.youtube.com/watch?v=B7xai5u_tnk',
-			'https://www.youtube.com/watch?v=3fxq7kqyWO8',
-			'https://www.youtube.com/watch?v=ih2xubMaZWI',
-			'https://www.youtube.com/watch?v=qn-X5A0gbMA',
-			'https://www.youtube.com/watch?v=2ggzxInyzVE',
-			'https://www.youtube.com/watch?v=psuRGfAaju4',
-			'https://www.youtube.com/watch?v=J2X5mJ3HDYE',
-			'https://www.youtube.com/watch?v=UbQgXeY_zi4',
-			'https://www.youtube.com/watch?v=O5ZN3_svgs0',
-			'https://www.youtube.com/watch?v=-Tdu4uKSZ3M',
+			'Nightcore - How To Be A Heartbreaker',
+			'Electric Six - Body Shot',
+			'TheFatRat - Unity',
+			'TheFatRat - Monody (feat. Laura Brehm)',
+			'TheFatRat - Time Lapse',
+			'OMFG - Hello',
+			'OMFG - I Love You',
+			'The Wanted - Glad You Came',
+			'Owl City - Fireflies',
+			'DEAF KEV - Invincible [NCS Release]',
+			'Caravan Palace - Lone Digger',
+			'Phantom Sage - Holystone',
+			'Yes - Roundabout',
 		]
 
 		self.mpv = None
@@ -152,6 +152,8 @@ class Player:
 		self.next_song()
 
 class EventPool:
+	BIG_POOL_SIZE = 200
+
 	def __init__(self, driver, auth_data):
 		self.driver = driver
 		self.player = Player(self)
@@ -192,7 +194,7 @@ class EventPool:
 
 		self.phrases = [
 			'Write !help to know that I can do.',
-			'Just reminder that I\'ve work as a chat bot here.'
+			'Just reminder that I\'ve work as a chat bot here.',
 			'Hi mates. I\'m a Deadbot :D',
 		]
 
@@ -388,28 +390,33 @@ def track_events(driver, auth_data):
 
 	event_pool.say('Hi chat. I\'m alive!')
 
-	try:
-		while True:
-			try:
-				events = parse_events(driver)
-			except StaleElementReferenceException:
-				# HACK
-				# I dont know why, but sometimes selenium got this exception
-				# Its cause tree changes while makes query, i guess
-				continue
+	while True:
+		try:
+			events = parse_events(driver)
+		except StaleElementReferenceException:
+			# HACK
+			# I dont know why, but sometimes selenium got this exception
+			# Its cause tree changes while makes query, i guess
+			continue
 
-			event_pool.add(events, True)
-			event_pool.ping()
+		event_pool.add(events, True)
+		event_pool.ping()
 
-			time.sleep(0.1)
-	except KeyboardInterrupt:
-		event_pool.say('Oh, I need to sleep for a while')
+		time.sleep(0.1)
+
+		if event_pool.size > EventPool.BIG_POOL_SIZE:
+			return 'Restart'
+
+	return 'Exit'
 
 def main(args):
 	auth_data = parse_auth_data(args)
 	driver = connect_to_livecoding(AuthMethod.GOOGLE, auth_data)
-	go_to_chat(driver, auth_data)
-	track_events(driver, auth_data)
+
+	result = 'Restart'
+	while result == 'Restart':
+		go_to_chat(driver, auth_data)
+		result = track_events(driver, auth_data)
 
 if __name__ == '__main__':
 	main(sys.argv[1:])
