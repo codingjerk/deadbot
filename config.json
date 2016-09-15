@@ -69,7 +69,7 @@
 			}
 		},
 		"manager": {
-			"command-prefix": "/",
+			"command-prefix": "!",
 			"message-format": "[DeadBot]: {text}",
 			"greeting": "Hi! I'm alive!",
 			"parting": "Bye :C"
