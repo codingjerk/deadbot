@@ -27,17 +27,12 @@ class Engine(base.Engine):
 			return print('Connection was closed')
 
 		event = self.parse_response(response)
-		if self.event_can_be_processed(event):
-			self.on_event(event)
+		self.send_event(event)
 
 	def stop(self):
 		self.connection.close(timeout=0)
 		super().stop()
 
-	def start(self):
-		self.connect()
-
-	# TODO: connect -> start
 	def connect(self):
 		# TODO: replace EZyDJJ42-popout
 		# TODO: write common method for sending (raw) messages

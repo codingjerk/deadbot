@@ -1,5 +1,3 @@
-import events
-
 import time
 
 class Manager:
@@ -14,25 +12,21 @@ class Manager:
 		# Small delay needed to skip initial bunch on events
 		time.sleep(0.5)
 
-		# TODO: add common Extension.subscribe method
 		[e.start(self.reply) for e in self.extensions]
-		self.engine.on_event = self.on_event
+		engine.subscribe('on-join', self.on_join)
+		engine.subscribe('on-message', self.on_message_event)
 
 	def reply(self, message):
 		return self.engine.send(self.config['message-format'].format(text=message))
 
-	def on_event(self, event):
-		if event._type == events.Event.JOIN:
-			return self.on_join(event)
-		elif event._type == events.Event.MESSAGE and event.text.startswith(self.config['command-prefix']):
-			return self.on_command(event)
-		elif event._type == events.Event.MESSAGE:
-			return self.on_message(event)
-		else:
-			print('Unknown event type:', event)
-
 	def on_join(self, event):
 		[e.on_join(event.user) for e in self.extensions]
+
+	def on_message_event(self, event):
+		if event.text.startswith(self.config['command-prefix']):
+			return self.on_command(event)
+		else:
+			return self.on_message(event)
 
 	def on_command(self, event):
 		[command, *args] = event.text[len(self.config['command-prefix']):].split(' ')
