@@ -4,6 +4,7 @@
 			"channel": "d3adc0d3",
 
 			"bot-name": "deadbot",
+			"bot-color": "#915be3",
 			"bot-key-file": "deadbot.key.secret",
 
 			"ignore-own-messages": true
@@ -15,7 +16,7 @@
 					"Just reminder that I've work as a chat bot here.",
 					"Hi mates. I'm a DeadBot :D"
 				],
-				"chance": 0.016
+				"chance": 0.0005
 			},
 			"greeter": {
 				"greetings": [
@@ -70,7 +71,7 @@
 		},
 		"manager": {
 			"command-prefix": "!",
-			"message-format": "[DeadBot]: {text}",
+			"message-format": "{text}",
 			"greeting": "Hi! I'm alive!",
 			"parting": "Bye :C"
 		}

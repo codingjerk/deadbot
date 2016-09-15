@@ -64,6 +64,8 @@ class Engine(base.Engine):
 			(1, "<iq from='{name}@livecoding.tv' to='{channel}@chat.livecoding.tv/rex2' type='get' xmlns='jabber:client' id='13:sendIQ'><query xmlns='http://jabber.org/protocol/disco#info' node='https://candy-chat.github.io/candy/#kR9jljQwQFoklIvoOmy/GAli0gA='/></iq>"),
 			(1, "<iq from='{name}@livecoding.tv' to='{channel}@chat.livecoding.tv/marianyc' type='get' xmlns='jabber:client' id='14:sendIQ'><query xmlns='http://jabber.org/protocol/disco#info' node='https://candy-chat.github.io/candy/#kR9jljQwQFoklIvoOmy/GAli0gA='/></iq>"),
 			(0, "<iq from='{name}@livecoding.tv' to='{channel}@chat.livecoding.tv/{name}' type='get' xmlns='jabber:client' id='15:sendIQ'><query xmlns='http://jabber.org/protocol/disco#info' node='https://candy-chat.github.io/candy/#kR9jljQwQFoklIvoOmy/GAli0gA='/></iq>"),
+			(1, "<presence to='{channel}@chat.livecoding.tv' id='pres:16' xmlns='jabber:client'><priority>1</priority><c xmlns='http://jabber.org/protocol/caps' hash='sha-1' node='https://candy-chat.github.io/candy/' ver='kR9jljQwQFoklIvoOmy/GAli0gA='/><x xmlns='https://www.livecoding.tv/xmpp/muc#user'><item color='{color}'/></x></presence>"),
+			(1, "<iq from='{name}@livecoding.tv/web-{channel}-EZyDJJ42-popout' to='{channel}@chat.livecoding.tv/{name}' type='get' xmlns='jabber:client' id='15:sendIQ'><query xmlns='http://jabber.org/protocol/disco#info' node='https://candy-chat.github.io/candy/#kR9jljQwQFoklIvoOmy/GAli0gA='/></iq>"),
 		]
 
 		self.connection = websocket.create_connection("wss://ws.www.livecoding.tv/chat/websocket")
@@ -72,6 +74,7 @@ class Engine(base.Engine):
 			self.connection.send(message.format(
 				key=self.config['bot-key'],
 				name=self.config['bot-name'],
+				color=self.config['bot-color'],
 				channel=self.config['channel'],
 			))
 			[self.connection.recv() for _ in range(to_skip)]

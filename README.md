@@ -74,6 +74,16 @@ Currently Deadbot supports only Livecoding.tv, but I'll add twitch.tv support so
 - `channel` -- your channel name
 - `bot-name` -- name of bot's account on specified service
 - `bot-key` -- bot's account's key (see *Getting Livecoding.tv key* to get more info)
+- `bot-color` -- color of bot in chat. Supported colors is:
+	- `#e35b5b`
+	- `#e3a85b`
+	- `#d1e35b`
+	- `#8ee35b`
+	- `#5be3a8`
+	- `#5bbbe3`
+	- `#5b74e3`
+	- `#915be3`
+	- `#e35bde`
 - `bot-key-file` -- alternative to `bot-key` if you want to use external file with key
 - `ignore-own-messages` -- by default bot will not react on own messages, but this can be disabled, because it's usefull, especialy if you use our own account for bot
 
