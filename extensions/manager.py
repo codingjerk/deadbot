@@ -63,11 +63,27 @@ class Manager:
 			if text.startswith(prefix):
 				return parse_by_prefix(prefix)
 
+	def allowed_command(self, command_name, event):
+		favored_list = self.config['favored-users'] if 'favored-users' in self.config else []
+
+		for extension in self.extensions:
+			if command_name not in extension.commands: continue
+			command = extension.commands[command_name]
+
+			if 'favored-only' not in command: continue
+			if not command['favored-only']: continue
+			if event.user not in favored_list: return False
+
+		return True
+
 	def on_command(self, event):
 		command, args = self.parse_command(event.text)
 
 		if command == 'help':
 			return self.help_command(args, event)
+
+		if not self.allowed_command(command, event):
+			return self.reply(self.config['not-allowed-command-format'])
 
 		results = [e.on_command(event.user, command, args) for e in self.extensions]
 		if not any(results):

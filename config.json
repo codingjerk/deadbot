@@ -3,7 +3,7 @@
 			"service": "livecoding.tv",
 			"channel": "d3adc0d3",
 
-			"bot-name": "deadbot",
+			"bot-name": "undeadbot",
 			"bot-color": "#915be3",
 			"bot-key-file": "deadbot.key.secret",
 
@@ -42,6 +42,11 @@
 				"version": {
 					"answer": "0.1",
 					"description": "shows bot's version"
+				},
+				"rm": {
+					"answer": "All files was deleted",
+					"description": "deletes all files. Only for favored users",
+					"favored-only": true
 				}
 			},
 			"player-control": {
@@ -73,6 +78,11 @@
 			"command-prefix": ["!", "/"],
 			"message-format": "{text}",
 			"greeting": "Hi! I'm alive!",
-			"parting": "Bye :C"
+			"parting": "Bye :C",
+
+			"not-allowed-command-format": "This command is not allowed for you",
+			"favored-users": [
+				"d3adc0d3"
+			]
 		}
 	}
