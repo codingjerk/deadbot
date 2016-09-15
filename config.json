@@ -1,0 +1,76 @@
+{
+		"engine": {
+			"service": "livecoding.tv",
+			"channel": "d3adc0d3",
+
+			"bot-name": "deadbot",
+			"bot-key-file": "deadbot.key.secret",
+
+			"ignore-own-messages": true
+		},
+		"extensions": {
+			"spammer": {
+				"phrases": [
+					"Write !help to know that I can do.",
+					"Just reminder that I've work as a chat bot here.",
+					"Hi mates. I'm a DeadBot :D"
+				],
+				"chance": 0.016
+			},
+			"greeter": {
+				"greetings": [
+					"Oh my god! It's {user}!",
+					"Hi {user}, how r u?",
+					"New viewer here: {user}. Regards.",
+					"Hi {user}.",
+					"Ohoho! Hi {user}.",
+					"I was waiting for u, {user}.",
+					"Greetings from the soulless machine, {user}!"
+				]
+			},
+			"commands": {
+				"hi": {
+					"answer": "Hi, {user}",
+					"description": "says hi"
+				},
+				"say": {
+					"answer": "{args}",
+					"description": "says anything you want",
+					"args": ["PHRASE"]
+				},
+				"version": {
+					"answer": "0.1",
+					"description": "shows bot's version"
+				}
+			},
+			"player-control": {
+				"player": "mpv",
+				"scraper": "youtube",
+
+				"playing-format": "Playing {title} ({url})",
+				"adding-format": "{song} added to playlist",
+
+				"fallback-playlist": [
+					"Nightcore - How To Be A Heartbreaker",
+					"Electric Six - Body Shot",
+					"TheFatRat - Unity",
+					"TheFatRat - Monody (feat. Laura Brehm)",
+					"TheFatRat - Time Lapse",
+					"OMFG - Hello",
+					"OMFG - I Love You",
+					"The Wanted - Glad You Came",
+					"Owl City - Fireflies",
+					"DEAF KEV - Invincible [NCS Release]",
+					"Caravan Palace - Lone Digger",
+					"Phantom Sage - Holystone",
+					"Yes - Roundabout"
+				]
+			}
+		},
+		"manager": {
+			"command-prefix": "/",
+			"message-format": "[DeadBot]: {text}",
+			"greeting": "Hi! I'm alive!",
+			"parting": "Bye :C"
+		}
+	}
