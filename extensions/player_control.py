@@ -14,6 +14,7 @@ class Extension(base.Extension):
 		self.current_song = {'title': 'unknown', 'url': 'unknown'}
 
 		self.player.on_song_ends = self.next_song
+		self.voting = {}
 
 		self.commands = {
 			'play': {
@@ -29,7 +30,48 @@ class Extension(base.Extension):
 				'action': self.playlist_command,
 				'description': 'shows playlist',
 			},
+			'skip': {
+				'action': self.skip_command(vote=+1),
+				'description': 'starts skipping voting or votes YES',
+			},
+			'noskip': {
+				'action': self.skip_command(vote=-1),
+				'description': 'votes NO in skipping voting',
+			},
+			'forceskip': {
+				'action': self.skip_command(force=True),
+				'favored-only': True,
+			}
 		}
+
+	def update_voting_results(self):
+		current = max(0, sum(vote for vote in self.voting.values()))
+		needed = self.config['skip-votes']
+		self.reply('Votes for skipping current song: {current}/{needed}'.format(
+			current=current,
+			needed=needed,
+		))
+
+		if current >= needed:
+			self.voting = {}
+			self.player.skip()
+
+	def skip_command(self, vote=0, force=False):
+		if force:
+			def result(user, command, args):
+				self.voting = {}
+				self.player.skip()
+
+			return result
+
+		def result(user, command, args):
+			if user in self.voting and self.voting[user] == vote:
+				return self.reply('You can not vote again, {}'.format(user))
+
+			self.voting[user] = vote
+			self.update_voting_results()
+
+		return result
 
 	def start(self, reply_command):
 		super().start(reply_command)

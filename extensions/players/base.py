@@ -33,6 +33,10 @@ class Player(base.Extension):
 		self.current_song = song
 		if self.proc is not None: self.proc.kill()
 
+	def skip(self):
+		self.current_song = None
+		if self.proc is not None: self.proc.kill()
+
 	def stop(self):
 		self.terminated = True
 		if self.proc is not None: self.proc.kill()

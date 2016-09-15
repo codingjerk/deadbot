@@ -57,6 +57,8 @@
 				"adding-format": "{song} added to playlist.",
 				"failure-format": "Sorry, I can't play {song}.",
 
+				"skip-votes": 3,
+
 				"fallback-playlist": [
 					"Nightcore - How To Be A Heartbreaker",
 					"Electric Six - Body Shot",
