@@ -70,7 +70,7 @@
 			}
 		},
 		"manager": {
-			"command-prefix": "!",
+			"command-prefix": ["!", "/"],
 			"message-format": "{text}",
 			"greeting": "Hi! I'm alive!",
 			"parting": "Bye :C"

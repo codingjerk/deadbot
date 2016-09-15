@@ -22,14 +22,49 @@ class Manager:
 	def on_join(self, event):
 		[e.on_join(event.user) for e in self.extensions]
 
+	def get_default_command_prefix(self):
+		prefix = self.config['command-prefix']
+		if type(prefix) == str:
+			return prefix
+
+		return prefix[0]
+
+	def is_command(self, text):
+		prefix = self.config['command-prefix']
+		if type(prefix) == str:
+			return text.startswith(prefix)
+		else:
+			prefix_list = prefix
+
+		return any([text.startswith(prefix)
+			for prefix in prefix_list
+		])
+
 	def on_message_event(self, event):
-		if event.text.startswith(self.config['command-prefix']):
+		if self.is_command(event.text):
 			return self.on_command(event)
 		else:
 			return self.on_message(event)
 
+	def parse_command(self, text):
+		def parse_by_prefix(prefix):
+			command_end = len(prefix)
+			[cmd, *args] = text[command_end:].split(' ')
+
+			return cmd, [arg.strip() for arg in args]
+
+		prefix = self.config['command-prefix']
+		if type(prefix) == str:
+			return parse_by_prefix(prefix)
+		else:
+			prefix_list = prefix
+
+		for prefix in prefix_list:
+			if text.startswith(prefix):
+				return parse_by_prefix(prefix)
+
 	def on_command(self, event):
-		[command, *args] = event.text[len(self.config['command-prefix']):].split(' ')
+		command, args = self.parse_command(event.text)
 
 		if command == 'help':
 			return self.help_command(args, event)
@@ -51,7 +86,7 @@ class Manager:
 
 	def get_command_help(self, name, command):
 		return '{prefix}{name} {args} - {desc}\n'.format(
-			prefix=self.config['command-prefix'],
+			prefix=self.get_default_command_prefix(),
 			name=name,
 			args=self.get_command_args_help(command),
 			desc=self.get_command_description(command),
