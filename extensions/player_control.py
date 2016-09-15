@@ -67,7 +67,13 @@ class Extension(base.Extension):
 
 	def next_song(self):
 		requested_song = self.pick_song()
+
+		if not self.scraper.can_be_scraped(requested_song):
+			return self.notify_failure(requested_song)
+
 		url, title = self.scraper.scrap(requested_song)
+		if url is None or title is None:
+			return self.notify_failure(requested_song)
 		self.current_song = {
 			'title': requested_song,
 			'url': url,
@@ -93,6 +99,11 @@ class Extension(base.Extension):
 		if 'adding-format' not in self.config: return
 
 		self.reply(self.config['adding-format'].format(song=song))
+
+	def notify_failure(self, song):
+		if 'failure-format' not in self.config: return
+
+		self.reply(self.config['failure-format'].format(song=song))
 
 	def on_command(self, user, command, args):
 		if command not in self.commands: return False

@@ -47,8 +47,9 @@
 				"player": "mpv",
 				"scraper": "youtube",
 
-				"playing-format": "Playing {title} ({url})",
-				"adding-format": "{song} added to playlist",
+				"playing-format": "Playing {title} ({url}).",
+				"adding-format": "{song} added to playlist.",
+				"failure-format": "Sorry, I can't play {song}.",
 
 				"fallback-playlist": [
 					"Nightcore - How To Be A Heartbreaker",

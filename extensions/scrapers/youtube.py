@@ -14,12 +14,13 @@ class Scraper(base.Scraper):
 		super().__init__()
 
 	def can_be_scraped(self, song):
-		if not self.is_url(song): return True
+		if not self.is_url(song):
+			return True
 
 		return self.is_youtube_url(song)
 
 	def is_url(self, song):
-		return validators.url(song) is None
+		return validators.url(song)
 
 	def is_youtube_url(self, song):
 		if not self.is_url(song): return False
@@ -39,8 +40,6 @@ class Scraper(base.Scraper):
 		else:
 			url = self.get_song_url(song_title_or_url)
 
-		# TODO: return None if url requested, but its not youtube url
-		# TODO: return None if scraping was unsuccessful
 		title = self.get_song_title(url)
 		return url, title
 
@@ -54,16 +53,18 @@ class Scraper(base.Scraper):
 
 		return self.extract_song_url(data)
 
-	# TODO: process errors
 	def extract_song_title(self, html):
 		root = self.parse_html(html)
 		meta_nodes = root.xpath('.//meta[@property="og:title"]')
+		if len(meta_nodes) == 0: return
+
 		return meta_nodes[0].attrib['content']
 
-	# TODO: process errors
 	def extract_song_url(self, html):
 		root = self.parse_html(html)
 		link_nodes = root.xpath('.//h3[@class="yt-lockup-title "]/a')
+		if len(link_nodes) == 0: return
+
 		return 'https://youtube.com{url_part}'.format(
 			url_part=link_nodes[0].attrib['href']
 		)
