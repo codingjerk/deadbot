@@ -1,19 +1,29 @@
 # Youtube scraper
 
-from extensions import base
+from extensions.scrapers import base
 
 import itertools
 
 import requests
+import validators
 from urllib import parse
 from lxml import etree
 
-# TODO: use base.Scraper
-class Scraper(base.Extension):
+class Scraper(base.Scraper):
 	def __init__(self):
-		super().__init__({})
+		super().__init__()
+
+	def can_be_scraped(self, song):
+		if not self.is_url(song): return True
+
+		return self.is_youtube_url(song)
 
 	def is_url(self, song):
+		return validators.url(song) is None
+
+	def is_youtube_url(self, song):
+		if not self.is_url(song): return False
+
 		protocols = ['http', 'https']
 		hosts = ['youtube.com', 'youtu.be']
 		prefixes = ['', 'www.']
@@ -24,7 +34,7 @@ class Scraper(base.Extension):
 		return False
 
 	def scrap(self, song_title_or_url):
-		if self.is_url(song_title_or_url):
+		if self.is_youtube_url(song_title_or_url):
 			url = song_title_or_url
 		else:
 			url = self.get_song_url(song_title_or_url)
