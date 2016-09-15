@@ -82,11 +82,11 @@ Currently Deadbot supports only Livecoding.tv, but I'll add twitch.tv support so
 *Note: Livecoding.tv key is secret, never share it with outsiders.*
 
 To get livecoding.tv key:
-1. Open any livecoding.tv channel with chat
-1. Open developer tools and start recording network events
-1. Find WebSockets event
-1. Open WebSockets frames
-1. Find frame (it must be 4-rd) with similar content:
+- Open any livecoding.tv channel with chat
+- Open developer tools and start recording network events
+- Find WebSockets event
+- Open WebSockets frames
+- Find frame (it must be 4-rd) with similar content:
 	- `<auth xmlns='urn:ietf:params:xml:ns:xmpp-sasl' mechanism='PLAIN'>HERE IS YOUR KEY</auth>`
 
 ### Extensions
