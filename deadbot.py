@@ -8,8 +8,8 @@ import parser
 def log_exception(exception):
 	print(exception)
 
-def observe(function):
-	try: function()
+def observe(function, *args, **kwargs):
+	try: function(*args, **kwargs)
 	except Exception as exception: log_exception(exception)
 
 def get_config(args):
@@ -21,7 +21,6 @@ def get_config(args):
 def main(args):
 	config = get_config(args)
 
-	# TODO: observe(parser.validate_config, config)
 	manager = parser.build_manager(config)
 	observe(manager.wait)
 
