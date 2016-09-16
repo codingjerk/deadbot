@@ -41,13 +41,12 @@ class Engine:
 
 	def work_base(self):
 		try:
-			while not self.terminated:
-				self.work()
+			while not self.terminated and self.work(): pass
 		except KeyboardInterrupt:
 			pass
 
 	def work(self):
-		pass
+		return False
 
 	def event_can_be_processed(self, event):
 		if event is None: return False

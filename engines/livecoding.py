@@ -24,10 +24,12 @@ class Engine(base.Engine):
 		try:
 			response = self.connection.recv()
 		except websocket._exceptions.WebSocketConnectionClosedException:
-			return print('Connection was closed')
+			print('Connection was closed')
+			return False
 
 		event = self.parse_response(response)
 		self.send_event(event)
+		return True
 
 	def stop(self):
 		self.connection.close(timeout=0)

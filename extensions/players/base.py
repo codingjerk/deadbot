@@ -17,7 +17,7 @@ class Player(base.Extension):
 
 		if song is None:
 			time.sleep(0.5)
-			return
+			return True
 
 		self.proc = self.open_player(song)
 		try:
@@ -28,6 +28,8 @@ class Player(base.Extension):
 
 		if self.on_song_ends is not None:
 			self.on_song_ends()
+
+		return True
 
 	def play(self, song):
 		self.current_song = song

@@ -25,13 +25,12 @@ class Extension:
 
 	def work_base(self):
 		try:
-			while not self.terminated:
-				self.work()
+			while not self.terminated and self.work(): pass
 		except KeyboardInterrupt as e:
 			raise e
 
 	def work(self):
-		pass
+		return False
 
 	def on_join(self, user):
 		pass

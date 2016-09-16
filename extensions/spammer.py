@@ -15,3 +15,4 @@ class Extension(base.Extension):
 			self.reply(phrase)
 
 		time.sleep(1)
+		return True
