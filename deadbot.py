@@ -3,9 +3,6 @@
 import sys
 import json
 
-# TODO: bug with Playing Schandmaul - Der letzte Tanz [Lyrics] song
-# /play Schandmaul Der Letzte Tanz
-
 import parser
 
 def log_exception(exception):
