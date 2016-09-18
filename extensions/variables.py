@@ -11,15 +11,18 @@ class Extension(base.Extension):
 				'action': self.set_command,
 				'favored-only': True,
 				'description': 'sets variable. Only for favored users',
+				'args': ['VARIABLE', 'VALUE'],
 			},
 			'unset': {
 				'action': self.unset_command,
 				'favored-only': True,
 				'description': 'removes variable. Only for favored users',
+				'args': ['VARIABLE'],
 			},
 			'get': {
 				'action': self.get_command,
 				'description': 'gets variable',
+				'args': ['VARIABLE'],
 			},
 		}
 
