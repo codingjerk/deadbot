@@ -12,6 +12,11 @@ class Extension(base.Extension):
 				'favored-only': True,
 				'description': 'sets variable. Only for favored users',
 			},
+			'unset': {
+				'action': self.unset_command,
+				'favored-only': True,
+				'description': 'removes variable. Only for favored users',
+			},
 			'get': {
 				'action': self.get_command,
 				'description': 'gets variable',
@@ -36,26 +41,48 @@ class Extension(base.Extension):
 
 	def set_command(self, user, command, args):
 		[name, *args] = args
-		self.variables[name] = ' '.join(args)
+		value = ' '.join(args)
+		self.variables[name] = value
 		
 		if self.need_to_append_commands():
 			self.append_as_command(name)
 
+		if 'set-format' not in self.config: return
+
+		self.reply(self.config['set-format'].format(
+			name=name,
+			value=value,
+		))
+
+	def unset_command(self, user, command, args):
+		[name, *_] = args
+		if name not in self.variables:
+			self.notify_unknown(name)
+
+		del self.variables[name]
+		if self.need_to_append_commands():
+			del self.commands[name]
+
+		if 'unset-format' not in self.config: return
+
+		self.reply(self.config['unset-format'].format(
+			name=name,
+		))
+
+	def notify_unknown(self, name):
+		if 'unknown-format' not in self.config: return
+
+		self.reply(self.config['unknown-format'].format(
+			name=name
+		))
+
 	def show_variable(self, name):
 		if name not in self.variables:
-			if 'unknown-format' in self.config:
-				fmt = self.config['unknown-format']
-			else:
-				fmt = 'Unknown variable {name}'			
+			return self.notify_unknown(name)
 
-			return self.reply(fmt.format(name=name))
+		if 'show-format' not in self.config: return
 
-		if 'show-format' in self.config:
-			fmt = self.config['show-format']
-		else:
-			fmt = '{name} = {variable}'
-
-		self.reply(fmt.format(
+		self.reply(self.config['show-format'].format(
 			name=name,
 			value=self.variables[name],
 		))

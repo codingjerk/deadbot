@@ -42,9 +42,13 @@
 			},
 			"variables": {
 				"allow-to-use-variables-as-commands": true,
+
+				"set-format": "The {name} is {value} now.",
+				"unset-format": "The {name} variable was removed.",
+
 				"show-format": "The {name} is {value}.",
 				"unknown-format": "The {name} variable is not setted.",
-				
+
 				"vars": {
 					"version": "1.0"
 				}
