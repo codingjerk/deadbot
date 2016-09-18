@@ -38,15 +38,15 @@
 					"answer": "{args}",
 					"description": "says anything you want",
 					"args": ["PHRASE"]
-				},
-				"version": {
-					"answer": "0.1",
-					"description": "shows bot's version"
-				},
-				"rm": {
-					"answer": "All files was deleted",
-					"description": "deletes all files. Only for favored users",
-					"favored-only": true
+				}
+			},
+			"variables": {
+				"allow-to-use-variables-as-commands": true,
+				"show-format": "The {name} is {value}.",
+				"unknown-format": "The {name} variable is not setted.",
+				
+				"vars": {
+					"version": "1.0"
 				}
 			},
 			"player-control": {

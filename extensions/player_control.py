@@ -41,7 +41,8 @@ class Extension(base.Extension):
 			'forceskip': {
 				'action': self.skip_command(force=True),
 				'favored-only': True,
-			}
+				'description': 'skips song immediately. Only for favored users',
+			},
 		}
 
 	def update_voting_results(self):

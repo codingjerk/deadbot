@@ -15,6 +15,7 @@ def build_extensions(config):
 		for name, config in config['extensions'].items()
 	])
 
+# TODO: getting extensions dynamicaly
 def build_extension(name, config):
 	if name == 'spammer':
 		from extensions import spammer
@@ -30,6 +31,9 @@ def build_extension(name, config):
 		scraper = build_scraper(config['scraper'])
 		from extensions import player_control
 		return player_control.Extension(config, player, scraper)
+	elif name == 'variables':
+		from extensions import variables
+		return variables.Extension(config)
 
 def build_player(name):
 	if name == 'mpv':

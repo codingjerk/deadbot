@@ -117,6 +117,7 @@ class Manager:
 
 		return result
 
+	# TODO: depend on favour-only key append 'Only for favour users' to description
 	def help_command(self, args, event):
 		result = '\n== Help ==\n'
 
