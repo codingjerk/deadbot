@@ -55,6 +55,9 @@
 					"version": "1.0"
 				}
 			},
+			"filesystem": {
+				"root": "~/dev/deadbot"
+			},
 			"player-control": {
 				"player": "mpv",
 				"scraper": "youtube",

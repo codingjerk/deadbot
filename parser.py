@@ -34,6 +34,9 @@ def build_extension(name, config):
 	elif name == 'variables':
 		from extensions import variables
 		return variables.Extension(config)
+	elif name == 'filesystem':
+		from extensions import filesystem
+		return filesystem.Extension(config)
 
 def build_player(name):
 	if name == 'mpv':
