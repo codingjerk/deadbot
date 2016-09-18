@@ -16,6 +16,8 @@
 					"Just reminder that I've work as a chat bot here.",
 					"Hi mates. I'm a DeadBot :D"
 				],
+
+				"minimal-spam-interval": 120,
 				"chance": 0.0005
 			},
 			"greeter": {
