@@ -8,7 +8,7 @@ import time
 class Extension(base.Extension):
 	def __init__(self, config):
 		super().__init__(config)
-		self.last_spam = time.now()
+		self.last_spam = time.time()
 
 	def work(self):
 		time.sleep(1)
