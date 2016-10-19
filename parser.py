@@ -37,6 +37,9 @@ def build_extension(name, config):
 	elif name == 'filesystem':
 		from extensions import filesystem
 		return filesystem.Extension(config)
+	elif name == 'uptime':
+		from extensions import uptime
+		return uptime.Extension(config)
 
 def build_player(name):
 	if name == 'mpv':

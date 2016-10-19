@@ -83,6 +83,9 @@
 					"Phantom Sage - Holystone",
 					"Yes - Roundabout"
 				]
+			},
+			"uptime": {
+				"format": "Stream uptime: {time}"
 			}
 		},
 		"manager": {
