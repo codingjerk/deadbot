@@ -95,6 +95,7 @@
 			"message-format": "{text}",
 			"greeting": "Hi! I'm alive!",
 			"parting": "Bye :C",
+			"case-sensitive": false,
 
 			"not-allowed-command-format": "This command is not allowed for you",
 			"favored-users": [

@@ -79,6 +79,9 @@ class Manager:
 	def on_command(self, event):
 		command, args = self.parse_command(event.text)
 
+		if not self.config['case-sensitive']:
+			command = command.lower()
+
 		if command == 'help':
 			return self.help_command(args, event)
 
