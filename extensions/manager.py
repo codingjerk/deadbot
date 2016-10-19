@@ -17,6 +17,7 @@ class Manager:
 		engine.subscribe('on-message', self.on_message_event)
 
 	def reply(self, message):
+		# TODO: split long messages into separate messages
 		return self.engine.send(self.config['message-format'].format(text=message))
 
 	def on_join(self, event):
@@ -81,6 +82,9 @@ class Manager:
 
 		if not self.config['case-sensitive']:
 			command = command.lower()
+
+		if command in self.config['aliases']:
+			command = self.config['aliases'][command]
 
 		if command == 'help':
 			return self.help_command(args, event)

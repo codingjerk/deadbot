@@ -97,6 +97,11 @@
 			"parting": "Bye :C",
 			"case-sensitive": false,
 
+			"aliases": {
+				"dir": "ls",
+				"voting": "start_voting"
+			},
+
 			"not-allowed-command-format": "This command is not allowed for you",
 			"favored-users": [
 				"d3adc0d3"
