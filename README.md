@@ -1,6 +1,6 @@
 # DeadBot
 
-DeadBot is simple selenium-based Livecoding.tv chat bot.
+DeadBot is extension-based multiservice (with Livecoding.tv support) chat bot.
 
 ## Dependencies
 
