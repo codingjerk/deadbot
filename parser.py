@@ -40,6 +40,9 @@ def build_extension(name, config):
 	elif name == 'uptime':
 		from extensions import uptime
 		return uptime.Extension(config)
+	elif name == 'voting':
+		from extensions import voting
+		return voting.Extension(config)
 
 def build_player(name):
 	if name == 'mpv':

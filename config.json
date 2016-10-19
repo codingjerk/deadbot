@@ -86,6 +86,8 @@
 			},
 			"uptime": {
 				"format": "Stream uptime: {time}"
+			},
+			"voting": {
 			}
 		},
 		"manager": {
