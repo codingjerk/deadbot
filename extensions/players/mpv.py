@@ -10,7 +10,7 @@ class Player(base.Player):
 
 	def open_player(self, song):
 		return subprocess.Popen(
-			['mpv', song, '--vo', 'null'],
+			['mpv', song, '--no-video'],
 			stdout=subprocess.DEVNULL,
 			stderr=subprocess.DEVNULL,
 		)
