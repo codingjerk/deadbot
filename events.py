@@ -1,6 +1,7 @@
 class Event:
 	MESSAGE = 'MESSAGE'
 	JOIN = 'JOIN'
+	LEAVE = 'LEAVE'
 
 	def __init__(self, _type, user, text):
 		self._type = _type
@@ -18,3 +19,6 @@ class Event:
 
 	def join(user):
 		return Event(Event.JOIN, user, 'joined the room')
+
+	def leave(user):
+		return Event(Event.LEAVE, user, 'leaved the room')

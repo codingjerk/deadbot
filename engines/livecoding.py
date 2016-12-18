@@ -98,6 +98,8 @@ class Engine(base.Engine):
 			pass
 		elif self.is_join(root):
 			return self.process_join(root)
+		elif self.is_leave(root):
+			return self.process_leave(root)
 		else:
 			print('Unknown message: ', response)
 
@@ -179,14 +181,34 @@ class Engine(base.Engine):
 		])
 
 	def is_join(self, root):
-			if root.tag != 'presence': return False
+		if root.tag != 'presence': return False
 
-			jabber_x_node = root.find('{http://jabber.org/protocol/muc#user}x')
-			if jabber_x_node is None: return False
-			if 'from' not in root.attrib: return False
-			if '/' not in root.attrib['from']: return False
+		if 'type' in root.attrib and root.attrib['type'] == 'unavailable': return False
 
-			return True
+		jabber_x_node = root.find('{http://jabber.org/protocol/muc#user}x')
+		if jabber_x_node is None: return False
+		if 'from' not in root.attrib: return False
+		if '/' not in root.attrib['from']: return False
+
+		return True
+
+	def is_leave(self, root):
+		"""Presence: <presence from='d3adc0d3@chat.livecoding.tv/boza' to='undeadbot@livecoding.tv/web-d3adc0d3-EZyDJJ42
+			-popout' type='unavailable'><x xmlns='http://jabber.org/protocol/muc#user'><item affiliation='none' role='non
+			e'/></x><x xmlns='https://www.livecoding.tv/xmpp/muc#user'><item premium='false' staff='false'/></x></presenc
+			e>
+		"""
+		if root.tag != 'presence': return False
+
+		if 'type' not in root.attrib: return False
+		if root.attrib['type'] == 'unavailable': return False
+
+		jabber_x_node = root.find('{http://jabber.org/protocol/muc#user}x')
+		if jabber_x_node is None: return False
+		if 'from' not in root.attrib: return False
+		if '/' not in root.attrib['from']: return False
+
+		return True
 
 	def process_message(self, root):
 		user = root.attrib['from'].split('/')[-1]
@@ -201,6 +223,14 @@ class Engine(base.Engine):
 		user = jid.split('@')[0]
 
 		return events.Event.join(user)
+
+	def process_leave(self, root):
+		jid = root.attrib['from'].split('/')[-1]
+
+		# TODO: get user role from root/x/item@role and root/x/item@affiliation
+		user = jid.split('@')[0]
+
+		return events.Event.leave(user)
 
 	def get_split_point(self, message):
 		result = self.MAX_MESSAGE_SIZE

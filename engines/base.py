@@ -9,7 +9,10 @@ class Engine:
 		self.config = config
 		self.terminated = False
 		self.working_thread = threading.Thread(target=self.work_base)
+
+		# TODO: make in beauty too
 		self.on_join_listeners = []
+		self.on_leave_listeners = []
 		self.on_message_listeners = []
 
 		self.connect()
@@ -20,6 +23,8 @@ class Engine:
 
 		if event._type == events.Event.JOIN:
 			return self.on_join(event)
+		elif event._type == events.Event.LEAVE:
+			return self.on_leave(event)
 		elif event._type == events.Event.MESSAGE:
 			return self.on_message(event)
 		else:
@@ -30,9 +35,15 @@ class Engine:
 			self.on_join_listeners.append(listener)
 		elif event == 'on-message':
 			self.on_message_listeners.append(listener)
+		elif event == 'on-leave':
+			self.on_leave_listeners.append(listener)
 
 	def on_join(self, event):
 		for listener in self.on_join_listeners:
+			listener(event)
+
+	def on_leave(self, event):
+		for listener in self.on_leave_listeners:
 			listener(event)
 
 	def on_message(self, event):

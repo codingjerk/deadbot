@@ -13,7 +13,10 @@ class Manager:
 		time.sleep(0.5)
 
 		[e.start([self.reply, self.reply_code]) for e in self.extensions]
+
+		# TODO: make it beauty
 		engine.subscribe('on-join', self.on_join)
+		engine.subscribe('on-leave', self.on_leave)
 		engine.subscribe('on-message', self.on_message_event)
 
 	def reply(self, message):
@@ -24,6 +27,9 @@ class Manager:
 
 	def on_join(self, event):
 		[e.on_join(event.user) for e in self.extensions]
+
+	def on_leave(self, event):
+		[e.on_leave(event.user) for e in self.extensions]
 
 	def get_default_command_prefix(self):
 		prefix = self.config['command-prefix']

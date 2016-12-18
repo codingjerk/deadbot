@@ -38,6 +38,9 @@ class Extension:
 	def on_join(self, user):
 		pass
 
+	def on_leave(self, user):
+		pass
+
 	def on_command(self, user, command, args):
 		return False
 
