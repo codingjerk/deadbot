@@ -154,14 +154,6 @@ class Engine(base.Engine):
 			return True
 
 		# TODO: check why we get this
-		def is_presence_unavailable():
-			if root.tag != 'presence': return False
-			if 'type' not in root.attrib: return False
-			if root.attrib['type'] != 'unavailable': return False
-
-			return True
-
-		# TODO: check why we get this
 		def is_presence_caps():
 			if root.tag != 'presence': return False
 			if 'id' not in root.attrib: return False
@@ -175,7 +167,6 @@ class Engine(base.Engine):
 		return any([
 			is_iq_error(),
 			is_iq_get(),
-			is_presence_unavailable(),
 			is_presence_caps(),
 			is_iq_unavailable(),
 		])
@@ -193,15 +184,10 @@ class Engine(base.Engine):
 		return True
 
 	def is_leave(self, root):
-		"""Presence: <presence from='d3adc0d3@chat.livecoding.tv/boza' to='undeadbot@livecoding.tv/web-d3adc0d3-EZyDJJ42
-			-popout' type='unavailable'><x xmlns='http://jabber.org/protocol/muc#user'><item affiliation='none' role='non
-			e'/></x><x xmlns='https://www.livecoding.tv/xmpp/muc#user'><item premium='false' staff='false'/></x></presenc
-			e>
-		"""
 		if root.tag != 'presence': return False
 
 		if 'type' not in root.attrib: return False
-		if root.attrib['type'] == 'unavailable': return False
+		if root.attrib['type'] != 'unavailable': return False
 
 		jabber_x_node = root.find('{http://jabber.org/protocol/muc#user}x')
 		if jabber_x_node is None: return False

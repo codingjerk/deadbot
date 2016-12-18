@@ -9,6 +9,8 @@
 # TODO: save and load white/blacklists on run/exit
 # TODO: save and load playlist on run/exit
 
+# TODO: keep viewer list
+
 import sys
 import json
 
