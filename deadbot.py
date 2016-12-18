@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 # TODO: dynamic config reloading
-# TODO: add command's blacklists
+# TODO: add command's white/blacklists
 
 # TODO: allow to fill white/blacklists in runtime
 # TODO: allow to fill playlist in runtime
@@ -17,6 +17,14 @@
 # TODO: allow using youtube playlist as initial playlist
 # TODO: fix youtube bug
 # TODO: restart crushed mpv
+
+# TODO: let mark commands as favored-only
+# TODO: let write config in CSON and/or YAML
+
+# TODO: add "dummy" mode which will print messages instead of seding (for testing)
+# TODO: catch "ws already closed" on-quit exception
+
+# TODO: catch config/parsing exceptions and show it better way
 
 import sys
 import json

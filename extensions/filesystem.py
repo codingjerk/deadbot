@@ -3,6 +3,7 @@
 from extensions import base
 
 import os
+import time
 
 class Extension(base.Extension):
 	def __init__(self, config):
@@ -94,9 +95,8 @@ class Extension(base.Extension):
 		if not os.path.isfile(file_path):
 			return self.reply('This is not a file')
 
-		# TODO: use code for code files
+		# TODO: add "code files extensions" config option
 		# TODO: better use gists or pastebin for big files
-		# TODO: use async io for perfomace
 		result = open(file_path).read()
 
 		self.reply_code(result)

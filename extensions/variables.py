@@ -10,13 +10,13 @@ class Extension(base.Extension):
 			'set': {
 				'action': self.set_command,
 				'favored-only': True,
-				'description': 'sets variable. Only for favored users',
+				'description': 'sets variable',
 				'args': ['VARIABLE', 'VALUE'],
 			},
 			'unset': {
 				'action': self.unset_command,
 				'favored-only': True,
-				'description': 'removes variable. Only for favored users',
+				'description': 'removes variable',
 				'args': ['VARIABLE'],
 			},
 			'get': {
@@ -46,7 +46,7 @@ class Extension(base.Extension):
 		[name, *args] = args
 		value = ' '.join(args)
 		self.variables[name] = value
-		
+
 		if self.need_to_append_commands():
 			self.append_as_command(name)
 

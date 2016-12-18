@@ -100,6 +100,7 @@ class Manager:
 		if not self.allowed_command(command, event):
 			return self.reply(self.config['not-allowed-command-format'])
 
+		# TODO: use async io for perfomace
 		results = [e.on_command(event.user, command, args) for e in self.extensions]
 		if not any(results):
 			self.reply('I don\' know that command')
@@ -115,12 +116,19 @@ class Manager:
 		if 'description' not in command: return 'unknown description'
 		return command['description']
 
+	def get_command_favored_suffix(self, command):
+		if 'favored-only' not in command: return ''
+		if not command['favored-only']: return ''
+
+		return '. Only for favored users'
+
 	def get_command_help(self, name, command):
-		return '{prefix}{name} {args} - {desc}\n'.format(
+		return '{prefix}{name} {args} - {desc}{favored_suffix}\n'.format(
 			prefix=self.get_default_command_prefix(),
 			name=name,
 			args=self.get_command_args_help(command),
 			desc=self.get_command_description(command),
+			favored_suffix=self.get_command_favored_suffix(command),
 		)
 
 	def get_extension_help(self, name, extension):
@@ -132,7 +140,6 @@ class Manager:
 
 		return result
 
-	# TODO: depend on favour-only key append 'Only for favour users' to description
 	def help_command(self, args, event):
 		result = '\n== Help ==\n'
 

@@ -41,7 +41,7 @@ class Extension(base.Extension):
 			'forceskip': {
 				'action': self.skip_command(force=True),
 				'favored-only': True,
-				'description': 'skips song immediately. Only for favored users',
+				'description': 'skips song immediately',
 			},
 		}
 

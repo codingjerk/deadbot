@@ -54,13 +54,13 @@ class Extension(base.Extension):
 			'start_voting': {
 				'action': self.start_voting_command,
 				'favored-only': True,
-				'description': 'starts voting. Only for favored users',
+				'description': 'starts voting',
 				'args': ['TITLE', 'END CONDITION', 'VOTING VARIANTS'],
 			},
 			'end_voting': {
 				'action': self.end_voting_command,
 				'favored-only': True,
-				'description': 'ends voting. Only for favored users',
+				'description': 'ends voting',
 			},
 			'vote': {
 				'action': self.vote_command,
