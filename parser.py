@@ -44,12 +44,12 @@ def build_extension(name, config):
 		from extensions import voting
 		return voting.Extension(config)
 
-def build_player(name):
-	if name == 'mpv':
+def build_player(config):
+	if config['name'] == 'mpv':
 		from extensions.players import mpv
-		return mpv.Player()
+		return mpv.Player(config['config'])
 
-def build_scraper(name):
-	if name == 'youtube':
+def build_scraper(config):
+	if config['name'] == 'youtube':
 		from extensions.scrapers import youtube
 		return youtube.Scraper()

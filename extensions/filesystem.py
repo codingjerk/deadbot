@@ -59,26 +59,24 @@ class Extension(base.Extension):
 		# TODO: config (format)
 
 		dir = self.get_user_pwd(user)
-		result = '/code'
-		
+
 		items = os.listdir(dir)
 		if len(items) == 0:
-			result += '<Empty>'
+			result = '<Empty>'
 		else:
-			result += '\n'.join(
+			result = '\n'.join(
 				'* {}'.format(item)
 				for item in items
 			)
 
-		self.reply(result)
+		self.reply_code(result)
 
 	def pwd_command(self, user, command, args):
 		# TODO: arguments
 		dir = self.get_user_pwd(user)
-		result = '/code'
-		result += self.show_path(dir)
+		result = self.show_path(dir)
 
-		self.reply(result)
+		self.reply_code(result)
 
 	def cat_command(self, user, command, args):
 		# TODO: arguments
@@ -99,12 +97,9 @@ class Extension(base.Extension):
 		# TODO: use code for code files
 		# TODO: better use gists or pastebin for big files
 		# TODO: use async io for perfomace
-		# TODO: use self.reply_code, cause code is only supported by livecoding.tv
-		result = '/code'
+		result = open(file_path).read()
 
-		result += open(file_path).read()
-
-		self.reply(result)
+		self.reply_code(result)
 
 	def cd_command(self, user, command, args):
 		dir = self.get_user_pwd(user)

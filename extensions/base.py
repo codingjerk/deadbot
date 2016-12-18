@@ -9,12 +9,15 @@ class Extension:
 		self.commands = {}
 		self.working_thread = threading.Thread(target=self.work_base)
 
-	def start(self, reply_command):
-		self.reply_command = reply_command
+	def start(self, reply_commands):
+		self.reply_command, self.reply_code_command = reply_commands
 		self.working_thread.start()
 
 	def reply(self, message):
 		self.reply_command(message)
+
+	def reply_code(self, message):
+		self.reply_code_command(message)
 
 	def stop(self):
 		self.terminated = True

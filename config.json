@@ -59,8 +59,15 @@
 				"root": "~/dev/deadbot"
 			},
 			"player-control": {
-				"player": "mpv",
-				"scraper": "youtube",
+				"player": {
+					"name": "mpv",
+					"config": {
+						"arguments": ["--no-video", "--input-ipc-server=/tmp/mpvsocket"]
+					}
+				},
+				"scraper": {
+					"name": "youtube"
+				},
 
 				"playing-format": "Playing {title} ({url}).",
 				"adding-format": "{song} added to playlist.",
@@ -81,7 +88,8 @@
 					"DEAF KEV - Invincible [NCS Release]",
 					"Caravan Palace - Lone Digger",
 					"Phantom Sage - Holystone",
-					"Yes - Roundabout"
+					"Yes - Roundabout",
+					"Ape Escape 3 - Western Village"
 				]
 			},
 			"uptime": {

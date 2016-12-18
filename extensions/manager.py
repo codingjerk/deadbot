@@ -12,13 +12,15 @@ class Manager:
 		# Small delay needed to skip initial bunch on events
 		time.sleep(0.5)
 
-		[e.start(self.reply) for e in self.extensions]
+		[e.start([self.reply, self.reply_code]) for e in self.extensions]
 		engine.subscribe('on-join', self.on_join)
 		engine.subscribe('on-message', self.on_message_event)
 
 	def reply(self, message):
-		# TODO: split long messages into separate messages
 		return self.engine.send(self.config['message-format'].format(text=message))
+
+	def reply_code(self, message):
+		return self.engine.send_code(message)
 
 	def on_join(self, event):
 		[e.on_join(event.user) for e in self.extensions]

@@ -10,6 +10,8 @@ from xml.sax import saxutils
 
 class Engine(base.Engine):
 	def __init__(self, config):
+		self.MAX_MESSAGE_SIZE = 600
+
 		self.setup_key(config)
 		super().__init__(config)
 
@@ -200,8 +202,33 @@ class Engine(base.Engine):
 
 		return events.Event.join(user)
 
-	def send(self, message):
+	def get_split_point(self, message):
+		result = self.MAX_MESSAGE_SIZE
+		newline_corr = message.rfind('\n', 0, result)
+		double_newline_corr = message.rfind('\n\n', 0, result)
+
+		if newline_corr != -1 and abs(result - newline_corr) <= 30:
+			result = newline_corr + 1
+
+		if double_newline_corr != -1 and abs(result - double_newline_corr) <= 50:
+			result = double_newline_corr + 2
+
+		return result
+
+	def split_text_to_send(self, message):
+		if len(message) <= self.MAX_MESSAGE_SIZE:
+			return [message]
+
+		split_point = self.get_split_point(message)
+
+		head = message[:split_point]
+		tail = message[split_point:]
+
+		return [head] + self.split_text_to_send(tail)
+
+	def raw_send(self, message):
 		message = saxutils.escape(message)
+
 		send_command = "<message to='{channel}@chat.livecoding.tv' from='{name}@livecoding.tv' type='groupchat' id='36' xmlns='jabber:client'><body xmlns='jabber:client'>{message}</body><x xmlns='jabber:x:event'><composing/></x></message>"
 
 		self.connection.send(send_command.format(
@@ -209,3 +236,10 @@ class Engine(base.Engine):
 			name=self.config['bot-name'],
 			channel=self.config['channel'],
 		))
+
+	def send(self, message, prefix=''):
+		for part in self.split_text_to_send(message):
+			self.raw_send(prefix + part)
+
+	def send_code(self, message):
+		return self.send(message, prefix='/code')

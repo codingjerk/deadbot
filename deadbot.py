@@ -1,5 +1,14 @@
 #!/usr/bin/env python
 
+# TODO: dynamic config reloading
+# TODO: add command's blacklists
+
+# TODO: allow to fill white/blacklists in runtime
+# TODO: allow to fill playlist in runtime
+
+# TODO: save and load white/blacklists on run/exit
+# TODO: save and load playlist on run/exit
+
 import sys
 import json
 
