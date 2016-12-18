@@ -23,6 +23,9 @@ def build_extension(name, config):
 	elif name == 'greeter':
 		from extensions import greeter
 		return greeter.Extension(config)
+	elif name == 'leaver':
+		from extensions import leaver
+		return leaver.Extension(config)
 	elif name == 'commands':
 		from extensions import commands
 		return commands.Extension(config)

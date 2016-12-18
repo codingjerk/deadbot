@@ -31,6 +31,15 @@
 					"Greetings from the soulless machine, {user}!"
 				]
 			},
+			"leaver": {
+				"messages": [
+					"Good-bye, {user}!",
+					"Cheerio, {user}!",
+					"See you soon, {user}!",
+					"All the best, {user}!",
+					"I hope to see you soon, {user}! Good luck!"
+				]
+			},
 			"commands": {
 				"hi": {
 					"answer": "Hi, {user}",
