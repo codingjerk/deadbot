@@ -4,6 +4,7 @@ from engines import base
 import events
 
 import websocket
+import ssl
 from lxml import etree
 from xml.sax import saxutils
 
@@ -70,7 +71,7 @@ class Engine(base.Engine):
 			(1, "<iq from='{name}@livecoding.tv/web-{channel}-EZyDJJ42-popout' to='{channel}@chat.livecoding.tv/{name}' type='get' xmlns='jabber:client' id='14:sendIQ'><query xmlns='http://jabber.org/protocol/disco#info' node='https://candy-chat.github.io/candy/#kR9jljQwQFoklIvoOmy/GAli0gA='/></iq>"),
 		]
 
-		self.connection = websocket.create_connection("wss://ws.www.livecoding.tv/chat/websocket")
+		self.connection = websocket.create_connection("wss://ws.www.livecoding.tv/chat/websocket", sslopt={"cert_reqs": ssl.CERT_NONE})
 
 		for i, (to_skip, message) in enumerate(connection_messages):
 			self.connection.send(message.format(
