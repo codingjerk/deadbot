@@ -11,6 +11,13 @@
 
 # TODO: keep viewer list
 
+# TODO: rename some extensions (greeter, leaver)
+
+# TODO: python2-compatible
+# TODO: allow using youtube playlist as initial playlist
+# TODO: fix youtube bug
+# TODO: restart crushed mpv
+
 import sys
 import json
 

@@ -20,6 +20,9 @@ DeadBot is extension-based multiservice (with Livecoding.tv support) chat bot.
 $ sudo pip install -r requirements.txt
 ```
 
+*Note: prefer your system's package manager over the pip*
+*Note (2): not all packages may be in system's repository*
+
 ### 2. Copy default config file
 ```
 $ cp config.json ~/.deadbot.json
