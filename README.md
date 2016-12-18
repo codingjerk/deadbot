@@ -9,7 +9,7 @@ DeadBot is extension-based multiservice (with Livecoding.tv support) chat bot.
 	- lxml
 	- validators
 	- requests
-	- websocket
+	- websocket-client
 - Your own or separate bot's account on streaming platform
 - Command line
 
