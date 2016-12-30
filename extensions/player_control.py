@@ -103,6 +103,8 @@ class Extension(base.Extension):
 		self.reply(text)
 
 	def pick_song(self):
+		# TODO: fix birthday problem
+		# TODO: use one instance of player with some kind of ipc
 		if len(self.dynamic_playlist) == 0:
 			return random.choice(self.config['fallback-playlist'])
 

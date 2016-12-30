@@ -17,6 +17,7 @@
 # TODO: allow using youtube playlist as initial playlist
 # TODO: fix youtube bug
 # TODO: restart crushed mpv
+# TODO: use python-mpv
 
 # TODO: let mark commands as favored-only
 # TODO: let write config in CSON and/or YAML
@@ -25,6 +26,25 @@
 # TODO: catch "ws already closed" on-quit exception
 
 # TODO: catch config/parsing exceptions and show it better way
+
+# TODO: twitch.tv
+# TODO: exception-safe extensions and engines
+
+# TODO: unified events with emit and subscribe
+
+# TODO: watch mode: show chat messages and allow to reply in bot's cli
+
+# TODO: splice reply and broadcast commands (send reply on every event and set broadcast global-like)
+
+# TODO: allow to ignore users (livecodingtv_support)
+
+# TODO: make next-song votings :D
+
+# TODO: check for misspelled commands and show similar commands
+
+# TODO: add "interlocutor" extension as replacement to "say" command and rename "say" to "echo" or "print" (or both)
+
+# TODO: make it 100% covered by unit tests
 
 import sys
 import json
