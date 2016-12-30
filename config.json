@@ -1,127 +1,131 @@
 {
-		"engine": {
-			"service": "livecoding.tv",
-			"channel": "d3adc0d3",
-
-			"bot-name": "undeadbot",
-			"bot-color": "#915be3",
-			"bot-key-file": "deadbot.key.secret",
-
-			"ignore-own-messages": true
-		},
-		"extensions": {
-			"spammer": {
-				"phrases": [
-					"Write !help to know that I can do.",
-					"Just reminder that I've work as a chat bot here.",
-					"Hi mates. I'm a DeadBot :D"
-				],
-
-				"minimal-spam-interval": 120,
-				"chance": 0.0005
-			},
-			"greeter": {
-				"greetings": [
-					"Oh my god! It's {user}!",
-					"Hi {user}, how r u?",
-					"New viewer here: {user}. Regards.",
-					"Hi {user}.",
-					"Ohoho! Hi {user}.",
-					"I was waiting for u, {user}.",
-					"Greetings from the soulless machine, {user}!"
-				]
-			},
-			"leaver": {
-				"messages": [
-					"Good-bye, {user}!",
-					"Cheerio, {user}!",
-					"See you soon, {user}!",
-					"All the best, {user}!",
-					"I hope to see you soon, {user}! Good luck!"
-				]
-			},
-			"commands": {
-				"hi": {
-					"answer": "Hi, {user}",
-					"description": "says hi"
-				},
-				"say": {
-					"answer": "{args}",
-					"description": "says anything you want",
-					"args": ["PHRASE"]
-				}
-			},
-			"variables": {
-				"allow-to-use-variables-as-commands": true,
-
-				"set-format": "The {name} is {value} now.",
-				"unset-format": "The {name} variable was removed.",
-
-				"show-format": "The {name} is {value}.",
-				"unknown-format": "The {name} variable is not setted.",
-
-				"vars": {
-					"version": "1.0"
-				}
-			},
-			"filesystem": {
-				"root": "~/dev/deadbot"
-			},
-			"player-control": {
-				"player": {
-					"name": "mpv",
-					"config": {
-						"arguments": ["--no-video", "--input-ipc-server=/tmp/mpvsocket"]
-					}
-				},
-				"scraper": {
-					"name": "youtube"
-				},
-
-				"playing-format": "Playing {title} ({url}).",
-				"adding-format": "{song} added to playlist.",
-				"failure-format": "Sorry, I can't play {song}.",
-
-				"skip-votes": 3,
-
-				"fallback-playlist": [
-					"Nightcore - How To Be A Heartbreaker",
-					"Electric Six - Body Shot",
-					"TheFatRat - Unity",
-					"TheFatRat - Monody (feat. Laura Brehm)",
-					"TheFatRat - Time Lapse",
-					"OMFG - Hello",
-					"OMFG - I Love You",
-					"The Wanted - Glad You Came",
-					"Owl City - Fireflies",
-					"DEAF KEV - Invincible [NCS Release]",
-					"Caravan Palace - Lone Digger",
-					"Phantom Sage - Holystone",
-					"Yes - Roundabout",
-					"Ape Escape 3 - Western Village"
-				]
-			},
-			"uptime": {
-				"format": "Stream uptime: {time}"
-			},
-			"voting": {
-			}
-		},
-		"manager": {
-			"command-prefix": ["!", "/"],
-			"message-format": "{text}",
-			"greeting": "Hi! I'm alive!",
-			"parting": "Bye :C",
-			"case-sensitive": false,
-
-			"aliases": {
-				"dir": "ls",
-				"voting": "start_voting"
-			},
-
-			"not-allowed-command-format": "This command is not allowed for you",
-			"favored-users": [
-				"d3adc0d3"
-			]
-		}
-	}
+  "engine": {
+    "service": "livecoding.tv",
+    "channel": "d3adc0d3",
+    "bot-name": "undeadbot",
+    "bot-color": "#915be3",
+    "bot-key-file": "deadbot.key.secret",
+    "ignore-own-messages": true
+  },
+  "extensions": {
+    "spammer": {
+      "phrases": [
+        "Write !help to know that I can do.",
+        "Just reminder that I've work as a chat bot here.",
+        "Hi mates. I'm a DeadBot :D"
+      ],
+      "minimal-spam-interval": 120,
+      "chance": 0.0005
+    },
+    "greeter": {
+      "greetings": [
+        "Oh my god! It's {user}!",
+        "Hi {user}, how r u?",
+        "New viewer here: {user}. Regards.",
+        "Hi {user}.",
+        "Ohoho! Hi {user}.",
+        "I was waiting for u, {user}.",
+        "Greetings from the soulless machine, {user}!"
+      ]
+    },
+    "leaver": {
+      "messages": [
+        "Good-bye, {user}!",
+        "Cheerio, {user}!",
+        "See you soon, {user}!",
+        "All the best, {user}!",
+        "I hope to see you soon, {user}! Good luck!"
+      ]
+    },
+    "commands": {
+      "hi": {
+        "answer": "Hi, {user}",
+        "description": "says hi"
+      },
+      "say": {
+        "answer": "{args}",
+        "description": "says anything you want",
+        "args": [
+          "PHRASE"
+        ]
+      }
+    },
+    "variables": {
+      "allow-to-use-variables-as-commands": true,
+      "set-format": "The {name} is {value} now.",
+      "unset-format": "The {name} variable was removed.",
+      "show-format": "The {name} is {value}.",
+      "unknown-format": "The {name} variable is not setted.",
+      "vars": {
+        "version": "1.0"
+      }
+    },
+    "filesystem": {
+      "root": "~/dev/deadbot"
+    },
+    "player-control": {
+      "player": {
+        "name": "mpv",
+        "config": {
+          "arguments": [
+            "--no-video",
+            "--input-ipc-server=/tmp/mpvsocket",
+            "--no-resume-playback",
+            "--no-keep-open"
+          ]
+        }
+      },
+      "scraper": {
+        "name": "youtube"
+      },
+      "playing-format": "Playing {title} ({url}).",
+      "adding-format": "{song} added to playlist.",
+      "failure-format": "Sorry, I can't play {song}.",
+      "skip-votes": 3,
+      "fallback-playlist": [
+        "Nightcore - how to Be a Heartbreaker",
+        "Electric Six - Body Shot",
+        "Thefatrat - Unity",
+        "Thefatrat - Monody (feat. Laura Brehm)",
+        "Thefatrat - Time Lapse",
+        "Omfg - Hello",
+        "Omfg - I Love You",
+        "The Wanted - Glad You Came",
+        "Owl City - Fireflies",
+        "Deaf Kev - Invincible [ncs Release]",
+        "Caravan Palace - Lone Digger",
+        "Phantom Sage - Holystone",
+        "Yes - Roundabout",
+        "Ape Escape 3 - Western Village",
+        "Nightcore - Haters Gonna Hate",
+        "Nightcore - Shake It Off",
+        "Monstaz - Popcorn Funk",
+        "Krewella - Come & Get It",
+        "R.e.m. - It's the End of the World",
+        "Pixie Paris - Es Rappelt Im Karton"
+      ]
+    },
+    "uptime": {
+      "format": "Stream uptime: {time}"
+    },
+    "voting": {}
+  },
+  "manager": {
+    "command-prefix": [
+      "!",
+      "/"
+    ],
+    "message-format": "{text}",
+    "greeting": "Hi! I'm alive!",
+    "parting": "Bye :C",
+    "case-sensitive": false,
+    "aliases": {
+      "dir": "ls",
+      "voting": "start_voting"
+    },
+    "not-allowed-command-format": "This command is not allowed for you",
+    "favored-users": [
+      "d3adc0d3"
+    ]
+  }
+}
