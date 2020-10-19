@@ -1,6 +1,8 @@
-# DeadBot
+# deadbot
 
-DeadBot is extension-based multiservice (with Livecoding.tv support) chat bot.
+**Since livecoding.tv is no longer exist, bot is deprecated**
+
+deadbot is extension-based multiservice (with Livecoding.tv support) chat bot.
 
 ## Dependencies
 
